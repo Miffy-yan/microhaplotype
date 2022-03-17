@@ -1,0 +1,5 @@
+
+*.summary
+find_diff_list/micrhap.txt
+find_diff_list/.RData
+find_diff_list/.Rhistory
