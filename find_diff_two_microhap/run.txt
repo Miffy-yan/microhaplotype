@@ -1,0 +1,19 @@
+
+cd PATH_TO_R_SCRIPT
+Rscript find_diff.R microhap ref_microhap
+
+
+run example:
+Rscript find_diff.R ACTGC ACTGG
+----------------------------------------
+how to add arg:
+
+cd PATH_TO_R_SCRIPT
+Rscript myscript.R arg1 arg2
+
+
+In myscript.R you add the code to read the arguments:
+
+args <- commandArgs(trailingOnly = TRUE)
+arg1 <- as.character(args[1])  
+arg2 <- as.numeric(args[2]) 

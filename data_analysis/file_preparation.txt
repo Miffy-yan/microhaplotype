@@ -1,0 +1,10 @@
+list the corresponding maternal microhaplotyps in the following 3 files:
+
+mat_microhap_chr16_1_7_amplicons.txt
+mat_microhap_chr16_2_chr17.txt
+mat_microhap_chr16_3.txt
+
+list only!!! the corresponding informative!!! paternal microhaplotyps in the following 3 files:
+pat_microhap_chr16_1_7_amplicons.txt
+pat_microhap_chr16_2_chr17.txt
+pat_microhap_chr16_3.txt

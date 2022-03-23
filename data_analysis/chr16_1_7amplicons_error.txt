@@ -1,0 +1,86 @@
+
+载入程辑包：‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+[1] "chr 4 mat is homo"
+[1] "chr 10 mat is homo"
+[1] "chr 15 mat is homo"
+[1] "chr 16 mat is homo"
+[1] "chr 18 mat is homo"
+
+载入程辑包：‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+[1] "chr 4 mat is homo"
+[1] "chr 10 mat is homo"
+[1] "chr 15 mat is homo"
+[1] "chr 16 mat is homo"
+[1] "chr 18 mat is homo"
+
+载入程辑包：‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+[1] "chr 4 mat is homo"
+[1] "chr 10 mat is homo"
+[1] "chr 15 mat is homo"
+[1] "chr 16 mat is homo"
+[1] "chr 18 mat is homo"
+[1] "on chr 4 pat informative microhap ACGCAGGGTAGGCGACCAG not in CC117_mat"
+[1] "on chr 4 pat informative microhap ACGCAGGGTAGGCAGCCGG not in CC117_mat"
+[1] "on chr 10 pat informative microhap TGTAGCATGCGCGGAGTCGTC not in CC117_mat"
+[1] "on chr 15 pat informative microhap GGTTTCAGACGCGCTATCCCTGGCTGAATTGGTCTAGGGACCGCCACTCCAGACCAT not in CC117_mat"
+[1] "on chr 16 pat informative microhap CCAGCCTGGAGAGCCACCGGCGGTGC not in CC117_mat"
+[1] "on chr 18 pat informative microhap CGTGCCAGGAGAATATACATA not in CC117_mat"
+
+载入程辑包：‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+[1] "chr 4 mat is homo"
+[1] "chr 10 mat is homo"
+[1] "chr 15 mat is homo"
+[1] "chr 16 mat is homo"
+[1] "chr 18 mat is homo"
+
+载入程辑包：‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+[1] "chr 4 mat is homo"
+[1] "chr 10 mat is homo"
+[1] "chr 15 mat is homo"
+[1] "chr 16 mat is homo"
+[1] "chr 18 mat is homo"
