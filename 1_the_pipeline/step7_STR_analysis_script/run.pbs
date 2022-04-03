@@ -1,0 +1,35 @@
+#!/bin/env bash
+#PBS -l walltime=3:00:00
+#PBS -l mem=2gb
+#PBS -l nodes=1:ppn=2
+#PBS -M yan.zhao1@student.kuleuven.be
+#PBS -m aeb
+#PBS -A lp_joris_vermeesch_c1
+
+##[HOWTO] #start the module:
+##[HOWTO] wsub -batch run.pbs -data SAMPLE.txt 
+
+module load BWA/0.7.17-foss-2018a
+module load SAMtools/1.9-GCC-6.4.0-2.28
+module load BEDTools/2.27.1-intel-2018a
+module load seqtk/1.3-foss-2018a
+
+#SAMPLE="dedup_CC112"
+
+bam_dir="/lustre1/project/stg_00019/research/yan/microhap/microhap11_CC117_control/step5_BWA_umicollapse"
+wkdir="$bam_dir/STRsearch_results"
+mkdir -p $wkdir
+
+#to obtain longer reads for STR analysis, STRsearch provides an option to assemble paired-end reads
+python3 /vsc-hard-mounts/leuven-data/339/vsc33900/A00_software/STRsearch/pipeline.py \
+--assemble_pairs True \
+from_bam \
+--working_path $wkdir \
+--sample $SAMPLE \
+--sex male \
+--bam $bam_dir/$SAMPLE.sortedByCoord.bam \
+--ref_bed /vsc-hard-mounts/leuven-data/339/vsc33900/A00_software/STRsearch/str.bed \
+--genotypes $wkdir/$SAMPLE.genotypes.txt \
+--multiple_alleles $wkdir/$SAMPLE.multiple_alleles.txt \
+--qc_matrix $wkdir/$SAMPLE.qc_matrix.txt
+

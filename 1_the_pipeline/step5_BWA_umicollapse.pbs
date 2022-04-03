@@ -1,0 +1,46 @@
+#!/bin/env bash
+#PBS -l walltime=4:00:00
+#PBS -l mem=5gb
+#PBS -l nodes=1:ppn=5
+#PBS -M yan.zhao1@student.kuleuven.be
+#PBS -m aeb
+#PBS -A lp_joris_vermeesch_c1
+
+#offer similar deduplication results as UMI-tools
+
+#wsub -batch step5_BWA_umicollapse.pbs -data change_name.txt
+
+module load Java/11.0.4 
+module load SAMtools/1.9-GCC-6.4.0-2.28
+
+#setting all parameters (these could be changed)
+PROJECT_DIR="/lustre1/project/stg_00019/research/yan/microhap/microhap13_cfDNA";
+SAMPLE_DIR="$PROJECT_DIR/step4_merged_bam"
+OUTPUT_DIR="$PROJECT_DIR/step5_BWA_umicollapse";
+THREADS=15
+mkdir -p $OUTPUT_DIR
+
+cd /vsc-hard-mounts/leuven-data/339/vsc33900/A00_software/UMICollapse
+
+#--umi-sep: separator string between the UMI and the rest of the read header. Default: _
+#If memory usage is still is an issue, --two-pass save memory when the reads are approximately sorted
+
+java -Xss1G \
+-jar umicollapse.jar bam -i $SAMPLE_DIR/$SAMPLE*.bam -o $OUTPUT_DIR/dedup_$NAME.bam --umi-sep : --paired --two-pass
+
+#samtools sort by coordinates by default 
+samtools sort -@ $THREADS -o $OUTPUT_DIR/dedup_$NAME.sortedByCoord.bam $OUTPUT_DIR/dedup_$NAME.bam;
+rm -r $OUTPUT_DIR/dedup_$NAME.bam;
+samtools index -b $OUTPUT_DIR/dedup_$NAME.sortedByCoord.bam;
+
+#bam to sam
+#-h, Include the header in the output.
+samtools view -h -o $OUTPUT_DIR/$NAME.sam $OUTPUT_DIR/dedup_$NAME.sortedByCoord.bam;
+
+
+
+
+
+
+
+

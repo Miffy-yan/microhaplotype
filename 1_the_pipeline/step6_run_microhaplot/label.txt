@@ -1,0 +1,2 @@
+0.05_spike-in.sam	CATTTTTA-CTCTCTAT	0.05_spike-in
+mat.sam	GCCAATAT-TATCCTCT	mat

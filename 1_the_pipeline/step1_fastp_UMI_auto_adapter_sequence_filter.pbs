@@ -1,0 +1,70 @@
+#!/bin/bash -l
+#PBS -l walltime=4:00:00
+#PBS -l mem=4gb
+#PBS -l nodes=1:ppn=4
+#PBS -M yan.zhao1@student.kuleuven.be
+#PBS -m eab
+#PBS -A lp_joris_vermeesch_c1
+
+##[HELP] This is a worker script: it uses SAMPLE parameter
+##[HOWTO] module load worker/1.6.10-intel-2018a 
+##[HOWTO] #start the module:
+##[HOWTO] wsub -batch step1_fastp_UMI_auto_adapter_sequence_filter.pbs -data microhap.txt
+
+#wget http://opengene.org/fastp/fastp
+#chmod a+x fastp
+
+#setting all parameters (these could be changed)
+PROJECT_DIR="/lustre1/project/stg_00019/research/yan/microhap/microhap11_CC117_control";
+SAMPLE_DIR="/lustre1/project/stg_00019/margot_research/220301_Microhaps_CC117spikein_Mar22";
+OUTPUT_DIR="$PROJECT_DIR/step1_fastp_UMI_filter";
+SCRATCH_DIR=$VSC_SCRATCH;
+
+#the actual script
+TMPDIR=$SCRATCH_DIR;
+TMP_DIR=`mktemp -d -t tmp.XXXXXXXX`;
+cd $TMP_DIR;
+
+rsync -ahr $SAMPLE_DIR/$SAMPLE.R?.fastq.gz .;
+
+FASTQ_FILES_1="$TMP_DIR/$SAMPLE.R1.fastq.gz" 
+FASTQ_FILES_2="$TMP_DIR/$SAMPLE.R2.fastq.gz";
+OUTPUT_1="$TMP_DIR/$SAMPLE.R1.clean.fastq.gz" 
+OUTPUT_2="$TMP_DIR/$SAMPLE.R2.clean.fastq.gz";
+
+
+#-Q,--disable_quality_filtering
+#-L, --disable_length_filtering   
+# minimum length requirement is specified with -l or --length_required
+# forward+reverse primer >=36 <=45; set --length_required 46 can remove all primer dimers 
+
+#per_read define umi1 as the head of read1, and umi2 as the head of read2
+#fastp will extract the UMIs, and append them to the first part of read names
+
+#For PE data, the adapter sequence auto-detection is disabled by default since the adapters can be trimmed by overlap analysis. 
+#However, you can specify --detect_adapter_for_pe to enable it.
+
+/vsc-hard-mounts/leuven-data/339/vsc33900/A00_software/fastp \
+      -i $FASTQ_FILES_1 -o $OUTPUT_1 \
+      -I $FASTQ_FILES_2 -O $OUTPUT_2 \
+      -U --umi_loc per_read --umi_len 12 \
+      --adapter_sequence=AGATCGGAAGAGCACACGTCTGAACTCCAGTCA \
+      --adapter_sequence_r2=AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT \
+      --detect_adapter_for_pe \
+      --length_required 46 \
+      --cut_tail \
+      --cut_tail_window_size 1 \
+      --cut_tail_mean_quality 15 \
+      --thread=5 \
+      --html $SAMPLE.fastp.html         
+
+
+rm $SAMPLE.R?.fastq.gz;
+
+mkdir -p $OUTPUT_DIR;
+cd $OUTPUT_DIR;
+rsync -ahr $TMP_DIR/* .;
+
+rm -r $TMP_DIR;
+
+

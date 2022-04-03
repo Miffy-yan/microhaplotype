@@ -1,0 +1,31 @@
+#!/bin/env bash
+#PBS -l walltime=1:00:00
+#PBS -l mem=5gb
+#PBS -l nodes=1:ppn=5
+#PBS -M yan.zhao1@student.kuleuven.be
+#PBS -m aeb
+#PBS -A lp_joris_vermeesch_c1
+
+#wsub -batch step4_merge_bam.pbs -data merge.txt 
+
+module load SAMtools/1.9-GCC-6.4.0-2.28
+
+#setting all parameters (these could be changed)
+PROJECT_DIR="/lustre1/project/stg_00019/research/yan/microhap/microhap13_cfDNA";
+SAMPLE_DIR="$PROJECT_DIR/step3_BWA_mapping"
+OUTPUT_DIR="$PROJECT_DIR/step4_merged_bam";
+
+mkdir -p $OUTPUT_DIR
+
+cd $SAMPLE_DIR
+
+bam_files=`ls $SAMPLE*.bam`
+
+samtools merge $OUTPUT_DIR/$SAMPLE.merged.bam $bam_files
+
+# -q option skips the alignments with MAPQ smaller than a certain value,
+samtools index -b $OUTPUT_DIR/$SAMPLE.merged.bam;
+
+
+
+

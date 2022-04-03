@@ -1,0 +1,61 @@
+#!/bin/env bash
+#PBS -l walltime=6:00:00
+#PBS -l mem=10gb
+#PBS -l nodes=1:ppn=5
+#PBS -M yan.zhao1@student.kuleuven.be
+#PBS -m aeb
+#PBS -A lp_joris_vermeesch_c1
+
+##[HOWTO] #start the module:
+##[HOWTO] wsub -batch step3_BWA_mapping.pbs -data microhap.txt 
+
+
+#loading the modules
+module load SAMtools/1.9-GCC-6.4.0-2.28
+module load BWA/0.7.17-foss-2018a
+
+#setting all parameters (these could be changed)
+PROJECT_DIR="/lustre1/project/stg_00019/research/yan/microhap/microhap13_cfDNA";
+GENOME_DIR="/lustre1/project/stg_00019/genome/homo_sapiens/hg38/BWA/0.7.15-intel2015a";
+SAMPLE_DIR="$PROJECT_DIR/step1_fastp_UMI_filter"
+OUTPUT_DIR="$PROJECT_DIR/step3_BWA_mapping";
+
+SCRATCH_DIR=$VSC_SCRATCH;
+
+THREADS=15
+
+#the actual script
+
+TMPDIR=$SCRATCH_DIR;
+TMP_DIR=`mktemp -d -t tmp.XXXXXXXX`;
+cd $TMP_DIR;
+
+rsync -ahrL $SAMPLE_DIR/$SAMPLE*.fastq.gz $TMP_DIR/;
+gunzip *gz;
+
+
+#paired end mapping
+FASTQ_FILES="$TMP_DIR/$SAMPLE.R1.clean.fastq $TMP_DIR/$SAMPLE.R2.clean.fastq";
+
+# bwa mem -C
+# Append append FASTA/Q comment to SAM output. 
+# This option can be used to transfer read meta information (e.g. barcode) to the SAM output. 
+# Note that the FASTA/Q comment (the string after a space in the header line) must conform the SAM spec (e.g. BC:Z:CGTAC). 
+
+bwa mem $GENOME_DIR/genome.fa $FASTQ_FILES | samtools view -Shb > $SAMPLE.bam
+
+rm -r *fastq;
+
+#samtools sort by coordinates by default 
+samtools sort -@ $THREADS -o $TMP_DIR/$SAMPLE.sortedByCoord.bam $TMP_DIR/$SAMPLE.bam ;
+rm -r $TMP_DIR/$SAMPLE.bam;
+samtools index -b $TMP_DIR/$SAMPLE.sortedByCoord.bam;
+
+
+mkdir -p $OUTPUT_DIR;
+cd $OUTPUT_DIR;
+rsync -ahr $TMP_DIR/$SAMPLE* .;
+rm -rf $TMP_DIR;
+
+
+

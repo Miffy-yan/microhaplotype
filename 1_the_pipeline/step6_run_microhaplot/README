@@ -1,0 +1,21 @@
+
+Command:
+
+module load Perl/5.28.1-GCCcore-6.4.0
+module load R/4.0.2-foss-2018a-bare
+
+
+nohup R --no-save <microhaplot.R > run.log 2>&1 &
+
+
+--------------install microhaplot software-------------
+#install.packages("devtools")
+
+#failed this way 
+devtools::install_github("ngthomas/microhaplot", build_vignettes = T, build_opts = c("--no-resave-data", "--no-manual"))
+
+#change to succeed
+devtools::install_github("ngthomas/microhaplot", build_vignettes = F)
+
+#use the microhaplot::mvHaplotype to establish the microhaplot Shiny App in a convenient location on your system. 
+#microhaplot::mvShinyHaplot("/vsc-hard-mounts/leuven-data/339/vsc33900/A00_software")

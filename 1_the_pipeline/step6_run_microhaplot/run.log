@@ -1,0 +1,58 @@
+
+R version 4.0.2 (2020-06-22) -- "Taking Off Again"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> #devtools::install_github("ngthomas/microhaplot", build_vignettes = TRUE)
+> #microhaplot::mvShinyHaplot("~/Shiny") # provide a directory path to host the microhaplot app
+> #browseVignettes("microhaplot")
+> #Once it is installed, the Shiny app is run like this:
+> #app.path <- file.path("~/Shiny", "microhaplot")
+> #microhaplot::runShinyHaplot(app.path)
+> 
+> library(microhaplot)
+> 
+> setwd("/lustre1/project/stg_00019/research/yan/microhap/microhap11_CC117_control/step6_run_microhaplot")
+> 
+> mvShinyHaplot("./")
+[1] TRUE
+> app.path <- file.path("./", "microhaplot")
+> 
+> haplo.read.tbl <- prepHaplotFiles(run.label = "all_SNP",
++                                   sam.path = "/lustre1/project/stg_00019/research/yan/microhap/microhap11_CC117_control/step5_BWA_umicollapse",
++                                   out.path = "microhaplot/",
++                                   label.path = "./label.txt",
++                                   vcf.path =  "./chr16_3_snp.vcf",
++                                   app.path = app.path)
+Perl is found in system
+...running Hapture.pl to extract haplotype information (takes a while)...
+
+...Prepping rds file : microhaplot//all_SNP.rds
+
+RDS file: copied into shiny directory: .//microhaplot/all_SNP*.rds 
+
+Run the following to open shiny app: runShinyHaplot(".//microhaplot")
+cp: ‘microhaplot//all_SNP_posinfo.rds’ and ‘.//microhaplot/./all_SNP_posinfo.rds’ are the same file
+cp: ‘microhaplot//all_SNP.rds’ and ‘.//microhaplot/./all_SNP.rds’ are the same file
+Warning messages:
+1: In read.table(label.path, sep = "\t", stringsAsFactors = FALSE) :
+  incomplete final line found by readTableHeader on './label.txt'
+2: `tbl_df()` was deprecated in dplyr 1.0.0.
+Please use `tibble::as_tibble()` instead.
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_warnings()` to see where this warning was generated. 
+> 
