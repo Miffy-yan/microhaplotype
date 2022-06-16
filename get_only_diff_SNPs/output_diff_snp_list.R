@@ -18,9 +18,11 @@ for (i in seq(2,(ncol(microhap)-1),by=2)){
     
     if (pat_1==pat_2 & pat_1 %in% c(mat_1,mat_2)==F){
       uniq_pat_list_long[paste(name,chr,"pat_hom",sep="_")][1]<-pat_1
-    }else if (pat_1!=pat_2 & pat_1 %in% c(mat_1,mat_2)==F) {
+    }
+    if (pat_1!=pat_2 & pat_1 %in% c(mat_1,mat_2)==F) {
       uniq_pat_list_long[paste(name,chr,"pat_het_1",sep="_")]<-pat_1
-    }else if (pat_1!=pat_2 & pat_2 %in% c(mat_1,mat_2)==F){
+    }
+    if (pat_1!=pat_2 & pat_2 %in% c(mat_1,mat_2)==F){
       uniq_pat_list_long[paste(name,chr,"pat_het_2",sep="_")]<-pat_2
     }   
   
@@ -63,9 +65,11 @@ for (i in seq(2,(ncol(microhap)-1),by=2)){
       pat_2_new_whol<-paste(pat_2_new,collapse = "")
       if ((pat_1_new_whol==pat_2_new_whol) & pat_1_new_whol %in% c(mat_1_new_whol,mat_2_new_whol)==F){
         uniq_pat_list_new[paste(name,chr,"pat_hom",sep="_")][1]<-pat_1_new_whol
-      }else if (pat_1_new_whol!=pat_2_new_whol & pat_1_new_whol %in% c(mat_1_new_whol,mat_2_new_whol)==F) {
+      }
+      if (pat_1_new_whol!=pat_2_new_whol & pat_1_new_whol %in% c(mat_1_new_whol,mat_2_new_whol)==F) {
         uniq_pat_list_new[paste(name,chr,"pat_het_1",sep="_")]<-pat_1_new_whol
-      }else if (pat_1_new_whol!=pat_2_new_whol & pat_2_new_whol %in% c(mat_1_new_whol,mat_2_new_whol)==F){
+      }
+      if (pat_1_new_whol!=pat_2_new_whol & pat_2_new_whol %in% c(mat_1_new_whol,mat_2_new_whol)==F){
         uniq_pat_list_new[paste(name,chr,"pat_het_2",sep="_")]<-pat_2_new_whol
       }  
     }
