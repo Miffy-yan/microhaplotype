@@ -5,6 +5,8 @@ microhap <- read.table("parent_120_117_115_116_122.txt",header = T)
 chrs<-unique(microhap$chr)
 dim(microhap)
 parent_info<-list()
+uniq_pat_list_long<-list()
+uniq_pat_list_new<-list()
 diff_TF_ls<-list()
 for (i in seq(2,(ncol(microhap)-1),by=2)){
   name<-sub("_maternal","",colnames(microhap)[i])
@@ -13,6 +15,15 @@ for (i in seq(2,(ncol(microhap)-1),by=2)){
     mat_2<-microhap[microhap$chr==chr,i][2]
     pat_1<-microhap[microhap$chr==chr,i+1][1]
     pat_2<-microhap[microhap$chr==chr,i+1][2]
+    
+    if (pat_1==pat_2 & pat_1 %in% c(mat_1,mat_2)==F){
+      uniq_pat_list_long[paste(name,chr,"pat_hom",sep="_")][1]<-pat_1
+    }else if (pat_1!=pat_2 & pat_1 %in% c(mat_1,mat_2)==F) {
+      uniq_pat_list_long[paste(name,chr,"pat_het_1",sep="_")]<-pat_1
+    }else if (pat_1!=pat_2 & pat_2 %in% c(mat_1,mat_2)==F){
+      uniq_pat_list_long[paste(name,chr,"pat_het_2",sep="_")]<-pat_2
+    }   
+  
     if (mat_1==mat_2) {
       print(paste(colnames(microhap)[i],"_chr_",chr," is homo",sep=""))
     } 
@@ -32,16 +43,47 @@ for (i in seq(2,(ncol(microhap)-1),by=2)){
         diff_TF[j]=TRUE
       }
     }
-    parent_info[[paste(name,"mat1",chr,sep="_")]]<-mat_1_sep[diff_TF]
-    parent_info[[paste(name,"mat2",chr,sep="_")]]<-mat_2_sep[diff_TF]
-    parent_info[[paste(name,"pat1",chr,sep="_")]]<-pat_1_sep[diff_TF]
-    parent_info[[paste(name,"pat2",chr,sep="_")]]<-pat_2_sep[diff_TF]
+    
+    
+    mat_1_new<-mat_1_sep[diff_TF]
+    mat_2_new<-mat_2_sep[diff_TF]
+    pat_1_new<-pat_1_sep[diff_TF]
+    pat_2_new<-pat_2_sep[diff_TF]
+    
+    parent_info[[paste(name,"mat1",chr,sep="_")]]<-mat_1_new
+    parent_info[[paste(name,"mat2",chr,sep="_")]]<-mat_2_new
+    parent_info[[paste(name,"pat1",chr,sep="_")]]<-pat_1_new
+    parent_info[[paste(name,"pat2",chr,sep="_")]]<-pat_2_new
+    
+    
+    if (length(mat_1_new)>0) {
+      mat_1_new_whol<-paste(mat_1_new,collapse = "")
+      mat_2_new_whol<-paste(mat_2_new,collapse = "")
+      pat_1_new_whol<-paste(pat_1_new,collapse = "")
+      pat_2_new_whol<-paste(pat_2_new,collapse = "")
+      if ((pat_1_new_whol==pat_2_new_whol) & pat_1_new_whol %in% c(mat_1_new_whol,mat_2_new_whol)==F){
+        uniq_pat_list_new[paste(name,chr,"pat_hom",sep="_")][1]<-pat_1_new_whol
+      }else if (pat_1_new_whol!=pat_2_new_whol & pat_1_new_whol %in% c(mat_1_new_whol,mat_2_new_whol)==F) {
+        uniq_pat_list_new[paste(name,chr,"pat_het_1",sep="_")]<-pat_1_new_whol
+      }else if (pat_1_new_whol!=pat_2_new_whol & pat_2_new_whol %in% c(mat_1_new_whol,mat_2_new_whol)==F){
+        uniq_pat_list_new[paste(name,chr,"pat_het_2",sep="_")]<-pat_2_new_whol
+      }  
+    }
+    
     diff_TF_ls[[paste(name,chr,sep="_")]] <- diff_TF
   }
 }
 
 sink(file="parental_haplotypes_only_informative.txt")
 print(parent_info,quote=F)
+sink()
+
+sink(file="uniq_pat_list_long.txt")
+print(uniq_pat_list_long,quote=F)
+sink()
+
+sink(file="uniq_pat_list_new.txt")
+print(uniq_pat_list_new,quote=F)
 sink()
 
 batch1<-read.table("chr16_1_7amplicons.txt",header = F)
