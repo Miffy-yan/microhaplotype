@@ -3,6 +3,8 @@
 setwd("/Users/miffy/OneDrive - KU Leuven/0_working directory/microhap_PAP-smears/0_rerun_microhaplot_only_diff_SNPs/output_diff_snp_list")
 microhap <- read.table("parent_120_117_115_116_122.txt",header = T)  
 chrs<-unique(microhap$chr)
+dim(microhap)
+parent_info<-list()
 diff_TF_ls<-list()
 for (i in seq(2,(ncol(microhap)-1),by=2)){
   name<-sub("_maternal","",colnames(microhap)[i])
@@ -30,9 +32,17 @@ for (i in seq(2,(ncol(microhap)-1),by=2)){
         diff_TF[j]=TRUE
       }
     }
+    parent_info[[paste(name,"mat1",chr,sep="_")]]<-mat_1_sep[diff_TF]
+    parent_info[[paste(name,"mat2",chr,sep="_")]]<-mat_2_sep[diff_TF]
+    parent_info[[paste(name,"pat1",chr,sep="_")]]<-pat_1_sep[diff_TF]
+    parent_info[[paste(name,"pat2",chr,sep="_")]]<-pat_2_sep[diff_TF]
     diff_TF_ls[[paste(name,chr,sep="_")]] <- diff_TF
   }
 }
+
+sink(file="parental_haplotypes_only_informative.txt")
+print(parent_info,quote=F)
+sink()
 
 batch1<-read.table("chr16_1_7amplicons.txt",header = F)
 batch2<-read.table("chr16_2_chr17_delete_3X.txt",header = F)
@@ -65,9 +75,9 @@ for (i in samples){
   batch1_ind<-ind_diff_snp[grep("_16_2$|_17$|_16_3$",ind_diff_snp$label,invert=T),1:9]
   batch2_ind<-ind_diff_snp[grep("_16_2$|_17$",ind_diff_snp$label),1:9]
   batch3_ind<-ind_diff_snp[grep("_16_3$",ind_diff_snp$label),1:9]
-  write.table(batch1_ind,file = paste(i,"batch1.txt",sep="_"),quote = F,col.names = F)
-  write.table(batch2_ind,file = paste(i,"batch2.txt",sep="_"),quote = F,col.names = F)
-  write.table(batch3_ind,file = paste(i,"batch3.txt",sep="_"),quote = F,col.names = F)
+  write.table(batch1_ind,file = paste(i,"batch1.txt",sep="_"),quote = F,col.names = F,row.names = F)
+  write.table(batch2_ind,file = paste(i,"batch2.txt",sep="_"),quote = F,col.names = F,row.names = F)
+  write.table(batch3_ind,file = paste(i,"batch3.txt",sep="_"),quote = F,col.names = F,row.names = F)
 }
 
 
