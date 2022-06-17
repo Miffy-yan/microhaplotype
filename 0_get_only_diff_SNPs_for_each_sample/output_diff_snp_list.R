@@ -121,9 +121,9 @@ for (i in samples){
   batch1_ind<-ind_diff_snp[grep("_16_2$|_17$|_16_3$",ind_diff_snp$label,invert=T),1:9]
   batch2_ind<-ind_diff_snp[grep("_16_2$|_17$",ind_diff_snp$label),1:9]
   batch3_ind<-ind_diff_snp[grep("_16_3$",ind_diff_snp$label),1:9]
-  write.table(batch1_ind,file = paste(i,"batch1.txt",sep="_"),quote = F,col.names = F,row.names = F)
-  write.table(batch2_ind,file = paste(i,"batch2.txt",sep="_"),quote = F,col.names = F,row.names = F)
-  write.table(batch3_ind,file = paste(i,"batch3.txt",sep="_"),quote = F,col.names = F,row.names = F)
+  write.table(batch1_ind,file = paste(i,"batch1.txt",sep="_"),quote = F,col.names = F,row.names = F,sep = "\t")
+  write.table(batch2_ind,file = paste(i,"batch2.txt",sep="_"),quote = F,col.names = F,row.names = F,sep = "\t")
+  write.table(batch3_ind,file = paste(i,"batch3.txt",sep="_"),quote = F,col.names = F,row.names = F,sep = "\t")
 }
 
 
