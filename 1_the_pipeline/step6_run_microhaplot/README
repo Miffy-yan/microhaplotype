@@ -1,4 +1,7 @@
 
+use 3 batches of vcf files for each sample
+
+
 Command:
 
 module load Perl/5.28.1-GCCcore-6.4.0
