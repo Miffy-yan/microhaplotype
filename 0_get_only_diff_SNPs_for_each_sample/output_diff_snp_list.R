@@ -96,14 +96,12 @@ batch3<-read.table("chr16_3.txt",header = F)
 
 diff_snp_all<-matrix(0,0,10)
 for (chr in chrs){
-  if (chr %in% unique(batch1[,1])){
+  if (chr %in% sub("16","16_1",unique(batch1[,1]))){
     batch<-batch1
-  }else if (chr %in% unique(batch2[,1])){
+  }else if (chr %in% sub("16","16_2",unique(batch2[,1]))){
     batch<-batch2
-    chr_16<- grep("_2",chr)
-  }else if (chr %in% unique(batch3[,1])){
+  }else if (chr %in% sub("16","16_3",unique(batch3[,1]))){
     batch<-batch3
-    chr_16<- sub("_3","",chr)
   }
   for (i in grep(paste("_",chr,"$",sep=""),names(diff_TF_ls),value = T)){
     all_snp<-batch[grep(sub("_\\d","",chr),batch[,1]),]
