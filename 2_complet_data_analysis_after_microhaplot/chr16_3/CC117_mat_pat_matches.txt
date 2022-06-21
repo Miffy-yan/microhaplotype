@@ -1,2 +1,0 @@
-sample barcode chr microhap num diff_H1(diff_homo) diff_H2 total_num percentage
-1 CC117_mat GAGTGGTA-TAATCTTA 16 ACGCGTCGGGCCG 31 1 2 754293 4.10980878783178e-05
