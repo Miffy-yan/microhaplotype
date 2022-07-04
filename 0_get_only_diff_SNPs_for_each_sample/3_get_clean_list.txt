@@ -6,3 +6,16 @@ uniq_pat_list_new.txt
 2.remove all spaces
 3. remove ^\n
 4.(_.*)(\n)-->$1\t
+
+get 
+1. maternal  
+
+cat parental_haplotypes_only_informative.txt|grep CC125_mat
+
+2. paternal  
+
+cat parental_haplotypes_only_informative.txt|grep CC125_pat
+
+3. unique paternal 
+
+cat uniq_pat_list_new.txt|grep CC125
