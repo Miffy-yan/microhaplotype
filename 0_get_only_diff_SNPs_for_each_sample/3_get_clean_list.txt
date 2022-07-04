@@ -1,0 +1,8 @@
+parental_haplotypes_only_informative.txt
+uniq_pat_list_long.txt
+uniq_pat_list_new.txt
+
+1.remove $ and [1]
+2.remove all spaces
+3. remove ^\n
+4.(_.*)(\n)-->$1\t

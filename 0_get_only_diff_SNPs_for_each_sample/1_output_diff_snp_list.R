@@ -1,7 +1,7 @@
 
 # ----get only informative SNPs for each trio
-setwd("/Users/miffy/OneDrive - KU Leuven/0_working directory/microhap_PAP-smears/0_rerun_microhaplot_only_diff_SNPs/output_diff_snp_list")
-microhap <- read.table("parent_120_117_115_116_122.txt",header = T)  
+setwd("/Users/miffy/OneDrive - KU Leuven/0_working directory/microhap_PAP-smears/19_new_pap_samples/0_get_diff_SNPs")
+microhap <- read.table("parent_112_119_125.txt",header = T)  
 chrs<-unique(microhap$chr)
 dim(microhap)
 parent_info<-list()

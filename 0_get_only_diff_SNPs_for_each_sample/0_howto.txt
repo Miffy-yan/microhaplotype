@@ -1,0 +1,17 @@
+
+3 scripts:
+
+1_output_diff_snp_list.R
+2_add_header_txt_to_vcf.sh
+3_get_clean_list.txt
+
+1 demo: (include all parental microhaplotypes in one file, 2 lines for each ROI <2 same lines if homo>)
+
+demo_parent.txt
+
+
+4 files needed:
+vcfheader.txt
+chr16_1_7amplicons.txt
+chr16_2_chr17_delete_3X.txt
+chr16_3.txt
