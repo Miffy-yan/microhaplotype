@@ -10,5 +10,3 @@ cat microhap.txt|grep -v SAMPLE|awk -F . '{print $1}'|uniq>>merge.txt
 # get label.txt for microhaplot
 
 cat change_name.txt|grep -v SAMPLE|awk -F ',' '{print $2".sam\t.\t"$2}'
-
-# remove extra spaces 

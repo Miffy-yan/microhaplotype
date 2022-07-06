@@ -1,10 +1,20 @@
+only for informative regions!!!
+-------------------------------
 list the corresponding maternal microhaplotyps in the following 3 files(one line for each homo region):
+
 
 mat_microhap_all_batch1.txt
 mat_microhap_all_batch2.txt
 mat_microhap_all_batch3.txt
 
+
+touch mat_microhap_all_batch1.txt mat_microhap_all_batch2.txt mat_microhap_all_batch3.txt
+
+
 list only!!! the corresponding informative!!! paternal microhaplotyps in the following 3 files:
 pat_microhap_info_batch1.txt
 pat_microhap_info_batch2.txt
 pat_microhap_info_batch3.txt
+
+
+touch pat_microhap_info_batch1.txt pat_microhap_info_batch2.txt pat_microhap_info_batch3.txt
