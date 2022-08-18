@@ -1,13 +1,15 @@
-cd *** CC11*
+# cd *** CC11*
+
+name="CC129"
 
 for i in `ls -d *_batch?`
 do 
-for sample in `ls $i/*range_0.4_2.2_min_reads_40_.txt`
+for sample in `ls $i/*range_0.41_2.75_min_reads_60_.txt`
 do
 echo $sample"\t"$i 
 cat $sample|awk '{print}'
 done
-done>CC125_results.txt
+done>$name.results.txt
 
 
 for i in `ls -d *_batch?`
@@ -17,4 +19,4 @@ do
 echo $sample"\t"$i 
 cat $sample|awk '{print}'
 done
-done>CC125_pat_match.txt
+done>$name.pat_match.txt
