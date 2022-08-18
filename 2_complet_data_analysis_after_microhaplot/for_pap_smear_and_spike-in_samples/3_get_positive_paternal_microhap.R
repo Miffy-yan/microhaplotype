@@ -1,6 +1,7 @@
-min_reads <- 40 
-lower_lim<-0.4
-upper_lim<-2.2
+min_reads <- 60 
+#0.27-3.35
+lower_lim<-0.27
+upper_lim<-3.35
 # fold range mean+-4sd
 wd<-"/Users/miffy/OneDrive - KU Leuven/0_working directory/microhap_PAP-smears/19_new_pap_samples/1st_finished_samples/CC125/microhap_raw_results/CC125_batch3"
 setwd(wd)

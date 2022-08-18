@@ -14,9 +14,11 @@ clean_data<-raw_data[grep("N|X", raw_data[,"microhap"], invert=TRUE),]
 # 2. sort the data by chr
 num_sorted_data<-clean_data %>% group_by(chr) %>% arrange(desc(num),bygroup=T)
 chr_sorted_data<-num_sorted_data %>% arrange(chr)
+#chr_sorted_data_top3<-chr_sorted_data %>% group_by(chr) %>% filter(row_number()<=3)
 
 out_dir<-paste(args[3],"/",sep="")
 write.table(chr_sorted_data, file=paste(out_dir,"/",sample,"_sorted_clean_data.txt",sep=""),quote=F)
+# write.table(chr_sorted_data_top3, file=paste(out_dir,"/",sample,"_sorted_clean_data_top3.txt",sep=""),quote=F)
 
   
       
