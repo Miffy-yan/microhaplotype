@@ -1,9 +1,5 @@
-
 *.summary
 find_diff_list/micrhap.txt
 find_diff_list/.RData
 find_diff_list/.Rhistory
-*.DS_Store
 .DS_Store
-.DS_Store
-2_complet_data_analysis_after_microhaplot/.DS_Store
