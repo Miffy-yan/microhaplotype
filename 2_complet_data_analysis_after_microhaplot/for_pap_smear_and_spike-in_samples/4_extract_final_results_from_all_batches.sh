@@ -1,15 +1,15 @@
 # cd *** CC11*
 
-name="CC129"
+name="CC119"
 
 for i in `ls -d *_batch?`
 do 
-for sample in `ls $i/*range_0.41_2.75_min_reads_60_.txt`
+for sample in `ls $i/*range_0.3_3.5_real_num_ratio_lim_9.55e-05_.txt`
 do
 echo $sample"\t"$i 
 cat $sample|awk '{print}'
 done
-done>$name.results.txt
+done>$name.range_0.3_3.5_real_num_ratio_lim_9.55e-05.results.txt
 
 
 for i in `ls -d *_batch?`
